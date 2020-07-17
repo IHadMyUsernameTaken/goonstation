@@ -528,10 +528,11 @@
 				return
 			var/patchloc = null
 			var/med = src.check_whitelist(R)
+			var/minipatch_vol = 15
 			if (use_box)
 				// create a patchbox
 				var/obj/item/item_box/medical_patches/B = new /obj/item/item_box/medical_patches(src.output_target)
-				B.name = "box of [patchname] [patchvol <= 20 ? "mini-" : null]patches"
+				B.name = "box of [patchname] [patchvol <= minipatch_vol ? "mini-" : null]patches"
 				patchloc = B
 				if (!med) // dangerrr
 					B.icon_state = "patchbox" // change icon
@@ -544,7 +545,7 @@
 			if (patchloc)
 				for (var/i=patchcount, i>0, i--)
 					var/obj/item/reagent_containers/patch/P
-					if (patchvol <= 20)
+					if (patchvol <= minipatch_vol)
 						P = new /obj/item/reagent_containers/patch/mini(patchloc)
 						P.name = "[patchname] mini-patch"
 					else
